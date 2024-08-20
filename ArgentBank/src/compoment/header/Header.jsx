@@ -13,7 +13,7 @@ function Header() {
         <img src={argentBankLogo} alt="Argent Bank Logo" />
       </Link>
 
-      <Link to="/Profile" className="main-nav-item">
+      <Link to="/Login" className="main-nav-item">
       <FontAwesomeIcon icon={faUserCircle} className='fa-user-circle'/>
         <span>Sign In</span>
       </Link>
