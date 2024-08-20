@@ -14,8 +14,8 @@ function Header() {
       </Link>
 
       <Link to="/Profile" className="main-nav-item">
-      <FontAwesomeIcon icon={faUserCircle} />
-        <span>sign in</span>
+      <FontAwesomeIcon icon={faUserCircle} className='fa-user-circle'/>
+        <span>Sign In</span>
       </Link>
 
     </header>
