@@ -1,41 +1,25 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginUser } from '../../assets/reduxe/action';
+
 import './Login.css';
 
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
 export default function Login() {
+
   const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
-  
-  const handleSubmit = async(event) => {
-    event.preventDefault();
+  const dispatch = useDispatch();
+  const error = useSelector((state) => state.error);
+  const loading = useSelector((state) => state.loading);
 
-    try {
-      const response = fetch('http://localhost:3001/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      });
-      
-      const data = await response.json();
-
-      if (response.ok) {
-        navigate('/Profile');
-      } else {
-        setError(data.message);
-      } 
-    } catch (error) {
-      console.error('erreur de connexion', error);
-      setError('erreur de connexion');
-    }
-      }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(loginUser(email, password));
+  };
 
   return (
     <main className="bg-dark">
@@ -70,7 +54,7 @@ export default function Login() {
             <label htmlFor="remember-me">Remember me</label>
           </div>
 
-          <button type="submit" className="sign-in-button">Sign In</button>
+          <button type="submit"className="sign-in-button" disabled={loading}>Sign In</button>
         </form>
       </section>
     </main>
