@@ -15,7 +15,7 @@ function Header() {
 
       <Link to="/Login" className="main-nav-item">
       <FontAwesomeIcon icon={faUserCircle} className='fa-user-circle'/>
-        <span>Sign In</span>
+        <b>Sign In</b>
       </Link>
 
     </header>
