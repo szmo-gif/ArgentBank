@@ -1,6 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../../assets/reduxe/action';
@@ -15,6 +18,15 @@ export default function Login() {
   const dispatch = useDispatch();
   const error = useSelector((state) => state.error);
   const loading = useSelector((state) => state.loading);
+
+  const isAuthenticated = useSelector((state) => state.isAuthenticated);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/profile');  // Redirige vers le profil
+    }
+  }, [isAuthenticated, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,11 +44,11 @@ export default function Login() {
           <div className="input-wrapper">
             <label htmlFor="username">Username</label>
             <input 
-            type="text"
-            id="username"
-            name="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}/>
+            type="email"
+            id="email"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}/>
           </div>
 
           <div className="input-wrapper">

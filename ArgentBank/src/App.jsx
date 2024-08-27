@@ -1,7 +1,6 @@
 import './App.css'
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
 
 import Header from './compoment/header/Header'
 import Home from './pages/home/Home'
@@ -22,7 +21,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/profile" element={<Profile />} render={() => (isAuthenticated ? <User /> : <Navigate to="/login" />)}/>
+        <Route path="/profile" element={<Profile />} />
       </Routes>
 
       <Footer />
