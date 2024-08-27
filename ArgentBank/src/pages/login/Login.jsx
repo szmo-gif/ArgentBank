@@ -42,7 +42,7 @@ export default function Login() {
 
         <form onSubmit={handleSubmit}>
           <div className="input-wrapper">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username">email</label>
             <input 
             type="email"
             id="email"

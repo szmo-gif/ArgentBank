@@ -9,6 +9,7 @@ const initialState = {
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'LOGIN_REQUEST':
+      console.log('Payload received in reducer:', action.payload); // Vérifie ce que le reducer reçoit
       return {
         ...state,
         loading: true,
