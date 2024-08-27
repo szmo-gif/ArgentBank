@@ -1,0 +1,23 @@
+[
+    {
+        "index": 0,
+        "type": "Argent Bank Checking",
+        "number": "x8349",
+        "amount": "$ 2,082.79",
+        "balance": "Available Balance"
+    },
+    {
+        "index": 1,
+        "type": "Argent Bank Savings",
+        "number": "x6712",
+        "amount": "$ 10,928.42",
+        "balance": "Available Balance"
+    },
+    {
+        "index": 2,
+        "type": "Argent Bank Credit Card",
+        "number": "x8349",
+        "amount": "$ 184.30",
+        "balance": "Current Balance"
+    }
+]
