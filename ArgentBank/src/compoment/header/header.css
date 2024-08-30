@@ -1,4 +1,4 @@
-header{
+header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -13,14 +13,19 @@ header{
     }
 }
 
-.main-nav-item{
+.main-nav {
+    display: flex;
+    align-items: center;
+}
+
+.main-nav-item {
     text-decoration: none;
     margin-right: 0.5rem;
     color: #2c3e50;
     display: flex;
     gap: 0.5rem;
 
-    &:hover{
+    &:hover {
         text-decoration: underline;
     }
 }

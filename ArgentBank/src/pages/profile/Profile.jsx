@@ -1,26 +1,28 @@
 import { useSelector } from 'react-redux';
-import Account from '../../compoment/account/Account';
 import accountData from '../../compoment/account/account.json';
+import Account from '../../compoment/account/Account';
+
+import './Profile.css';
 
 export default function Profile() {
   const user = useSelector((state) => state.user);
   console.log('User object:', user);
 
   return (
-    <main>
-      <h1>Welcome back {user ? user.userName : 'User'}</h1>
-      <button>edit name</button>
-
-      <section className="account-section">
-      {accountData.map((account, index) => (
-        <div key={index} className="account-item">
-          <h3>{account.type} ({account.number})</h3>
-          <p className="account-amount">{account.amount}</p>
-          <p className="account-balance">{account.balance}</p>
-        </div>
-      ))}
-    </section>
-
+    <main className="bg-dark">
+      <div className="header">
+        <h1>Welcome back {user ? user.userName : 'User'}</h1>
+        <button className='edit-button'>Edit name</button>
+      </div>
+        {accountData.map((account) => (
+          <Account
+          key={account.index}
+          type={account.type}
+          number={account.number}
+          amount={account.amount}
+          balance={account.balance}
+          />
+        ))}
     </main>
   );
 }

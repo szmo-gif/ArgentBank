@@ -1,12 +1,19 @@
-export default function Argent(type, number, amount, balance) {
-  return (
-    <section>
-      <h2>{type}</h2>
-      <p>{number}</p>
-      <b>{amount}</b>
-      <p>{balance}</p>
+import './Account.css';
+import React from 'react';
 
-      <button>View transactions</button>
+const Account = ({ type, number, amount, balance }) => {
+  return (
+    <section className="account">
+      <div className="account-content-wrapper">
+        <h2 className="account-title">{type} (Account {number})</h2>
+        <p className="account-amount">Amount: {amount}</p>
+        <p className="account-amount-description">{balance}</p>
+      </div>
+      <div class="account-content-wrapper cta">
+        <button class="transaction-button">View transactions</button>
+      </div>
     </section>
-  )
-}
+  );
+};
+
+export default Account;

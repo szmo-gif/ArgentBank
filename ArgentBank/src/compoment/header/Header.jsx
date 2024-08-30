@@ -1,6 +1,6 @@
 import argentBankLogo from '../../assets/image/argentBankLogo.png';
 import { Link, useNavigate } from 'react-router-dom';
-import './Header.css';
+import './header.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { useSelector, useDispatch } from 'react-redux';
@@ -24,7 +24,7 @@ function Header() {
       </Link>
 
       {isAuthenticated ? (
-        <div>
+        <div className='main-nav'>
           <Link className="main-nav-item">
             <FontAwesomeIcon icon={faUserCircle} className='fa-user-circle'/>
             <b>{user ? user.firstName : 'User'}</b>
