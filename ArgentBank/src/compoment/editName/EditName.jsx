@@ -1,29 +1,68 @@
 import './editName.css'
 
-export default function EditName() {
-  return (
-    <form>
-        <h1>Edit User info</h1>
+import React, { useEffect, useState } from 'react';
+export default function EditName({ userName, firstName, lastName }) {
+    const [changeUserName, setChangeUserName] = useState(userName);
 
-        <div>
-        <label htmlFor="username">User name: </label>
-        <input type="text" id="username" />
-        </div>
+    useEffect(() => {
+        setChangeUserName(userName);
+    }, [userName]);
 
-        <div>
-        <label htmlFor="firstname">First Name: </label>
-        <input type="text" id="fistname" />
-        </div>
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-        <div>
-        <label htmlFor="lastname">Last Name: </label>
-        <input type="text" id="lastname" />
-        </div>
+        try {
+            const response = await fetch('http://localhost:3001/api/v1/user/profile', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${localStorage.getItem('token')}`, // Assurez-vous que le token JWT est bien stocké dans le localStorage
+                },
+                body: JSON.stringify({
+                    userName: changeUserName,
+                }),
+            });
 
-        <div className='form-group'>
-        <button type="submit" className='edit-button'>Save</button>
-        <button type="submit" className='edit-button'>Cancel</button>
-        </div>
-    </form>
-  )
+            if (!response.ok) {
+                throw new Error('Failed to update user name');
+            }
+
+            const data = await response.json();
+            console.log('User name updated successfully:', data);
+            // Vous pouvez ajouter une logique supplémentaire ici, par exemple afficher un message de succès ou mettre à jour l'état du composant
+        } catch (error) {
+            console.error('Error updating user name:', error);
+            // Vous pouvez gérer l'affichage des erreurs ici
+        }
+    };
+
+    return (
+        <form className='edit-form' onSubmit={handleSubmit}>
+            <h1>Edit User info</h1>
+
+            <div>
+                <label htmlFor="username">User name: </label>
+                <input
+                    type="text"
+                    id="userName"
+                    value={changeUserName}
+                    onChange={(e) => setChangeUserName(e.target.value)} />
+            </div>
+
+            <div>
+                <label htmlFor="firstname">First Name: </label>
+                <input type="text" id="fistName" value={firstName} readOnly />
+            </div>
+
+            <div>
+                <label htmlFor="lastname">Last Name: </label>
+                <input type="text" id="lastName" value={lastName} readOnly />
+            </div>
+
+            <div className='form-group'>
+                <button type="submit" className='edit-button'>Save</button>
+                <button type="submit" className='edit-button'>Cancel</button>
+            </div>
+        </form>
+    )
 }
