@@ -25,7 +25,7 @@ function Header() {
 
       {isAuthenticated ? (
         <div className='main-nav'>
-          <Link className="main-nav-item">
+          <Link className="main-nav-item" to={'/profile'}>
             <FontAwesomeIcon icon={faUserCircle} className='fa-user-circle'/>
             <b>{user ? user.firstName : 'User'}</b>
           </Link>
