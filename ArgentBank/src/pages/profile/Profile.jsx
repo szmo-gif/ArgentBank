@@ -39,25 +39,27 @@ export default function Profile() {
 
   return (
     <main className="bg-dark">
-      <div className="header">
+      <header className="header">
         <h1>Welcome back {user ? user.userName : 'User'}</h1>
         <button className='edit-button' onClick={handleEditName}>Edit name</button>
         {editName &&
-        <EditName
-        firstName={userData.firstName}
-        lastName={userData.lastName}
-        userName={userData.userName}  
-        />}
-      </div>
+          <EditName
+            firstName={userData.firstName}
+            lastName={userData.lastName}
+            userName={userData.userName}
+          />}
+      </header>
+      <section>
         {accountData.map((account) => (
           <Account
-          key={account.index}
-          type={account.type}
-          number={account.number}
-          amount={account.amount}
-          balance={account.balance}
+            key={account.index}
+            type={account.type}
+            number={account.number}
+            amount={account.amount}
+            balance={account.balance}
           />
         ))}
+      </section>
     </main>
   );
 }

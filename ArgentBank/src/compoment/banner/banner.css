@@ -5,16 +5,17 @@
   background-repeat: no-repeat;
   height: 300px;
   position: relative;
-}
 
-header {
-  position: relative;
-  top: 2rem;
-  width: 200px;
-  background: white;
-  padding: 2rem;
-  text-align: left;
-  margin: 0 auto;
+
+  header {
+    position: relative;
+    top: 2rem;
+    width: 200px;
+    background: white;
+    padding: 2rem;
+    text-align: left;
+    margin: 0 auto;
+  }
 
   b {
     display: block;
@@ -33,14 +34,15 @@ header {
   .hero {
     height: 400px;
     background-position: 0% 33%;
-  }
 
-  header {
-    position: absolute;
-    top: 50px;
-    right: 50px;
-    width: 300px;
-    margin: 2rem;
+
+    header {
+      position: absolute;
+      top: 50px;
+      right: 50px;
+      width: 300px;
+      margin: 2rem;
+    }
 
     b {
       font-size: 1.5rem;

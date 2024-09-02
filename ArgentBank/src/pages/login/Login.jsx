@@ -6,17 +6,15 @@ import { useNavigate } from 'react-router-dom';
 
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from '../../assets/reduxe/action';
+import { loginUser } from '../../redux/action';
 
 import './Login.css';
 
 export default function Login() {
 
-  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
-  const error = useSelector((state) => state.error);
   const loading = useSelector((state) => state.loading);
 
   const isAuthenticated = useSelector((state) => state.isAuthenticated);
@@ -24,7 +22,7 @@ export default function Login() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/profile');  // Redirige vers le profil
+      navigate('/profile');
     }
   }, [isAuthenticated, navigate]);
 

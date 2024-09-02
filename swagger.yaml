@@ -101,6 +101,11 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
+
+#TODO: 2 ROUTES AVEC 3 VERBES
+#/transactions (GET) /transactions/{id} (GET et PUT)
+
+
 securityDefinitions:
   Bearer:
     type: apiKey
