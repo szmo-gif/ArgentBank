@@ -14,11 +14,11 @@ function Header() {
 
   const handleLogout = () => {
     dispatch(logoutUser());
-    navigate('/'); // Redirige vers la page d'accueil après déconnexion
+    navigate('/');
   };
 
   return (
-    <header>
+    <nav>
       <Link to="/">
         <img src={argentBankLogo} alt="Argent Bank Logo" />
       </Link>
@@ -41,7 +41,7 @@ function Header() {
           <b>Sign In</b>
         </Link>
       )}
-    </header>
+    </nav>
   );
 }
 

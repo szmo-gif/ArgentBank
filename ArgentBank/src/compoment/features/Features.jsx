@@ -1,19 +1,15 @@
 import React from 'react';
-import featuresData from './features.json';
-
 import './Features.css';
 
-function Features() {
+function Features( { src, alt, title, text } ) {
   return (
-    <section className="features">
-      {featuresData.features.map((feature, index) => (
-        <div className="feature-item" key={index}>
-          <img src={feature.src} alt={feature.alt} className='feature-icon' />
-          <h3 className="feature-item-title">{feature.title}</h3>
-          <p>{feature.text}</p>
-        </div>
-      ))}
-    </section>
+    <figure className="feature-item">
+          <img src={src} alt={alt}/>
+          <figcaption>
+          <h3>{title}</h3>
+          <p>{text}</p>
+          </figcaption>
+    </figure>
   );
 }
 
