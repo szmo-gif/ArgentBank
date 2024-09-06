@@ -4,17 +4,18 @@ import './header.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { useSelector, useDispatch } from 'react-redux';
-import { logoutUser } from '../../redux/action';
+import { logOut } from '../../redux/action';
 
 function Header() {
-  const isAuthenticated = useSelector((state) => state.isAuthenticated);
-  const user = useSelector((state) => state.user);
+  const isConnected = useSelector((state) => state.auth.isConnected);
+  const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    dispatch(logoutUser());
-    navigate('/');
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    dispatch(logOut());
+    navigate("/login");
   };
 
   return (
@@ -23,11 +24,11 @@ function Header() {
         <img src={argentBankLogo} alt="Argent Bank Logo" />
       </Link>
 
-      {isAuthenticated ? (
+      {isConnected ? (
         <div className='main-nav'>
           <Link className="main-nav-item" to={'/profile'}>
             <FontAwesomeIcon icon={faUserCircle} className='fa-user-circle'/>
-            <b>{user ? user.firstName : 'User'}</b>
+            <b>{user.firstName}</b>
           </Link>
 
           <Link to="/Login" className="main-nav-item" onClick={handleLogout}>

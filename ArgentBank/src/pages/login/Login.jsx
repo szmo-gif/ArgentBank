@@ -1,34 +1,39 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from '../../redux/action';
 
 import './Login.css';
+import { logIn } from '../../redux/action';
 
 export default function Login() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const dispatch = useDispatch();
-  const loading = useSelector((state) => state.loading);
+  const [rememberMe, setRememberMe] = useState(false);
 
-  const isAuthenticated = useSelector((state) => state.isAuthenticated);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate('/profile');
-    }
-  }, [isAuthenticated, navigate]);
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(loginUser(email, password));
+
+    if (!email || !password) {
+      alert('Veuillez remplir tous les champs');
+      return;
+    } 
+
+    try {
+      dispatch(logIn({ email, password, rememberMe }));
+      setTimeout(() => {
+        navigate('/profile');
+      }, 500)
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -39,7 +44,7 @@ export default function Login() {
         <h1>Sign In</h1>
 
         <form onSubmit={handleSubmit}>
-          <div className="input-wrapper">
+          <fieldset className="input-wrapper">
             <label htmlFor="username">email</label>
             <input 
             type="email"
@@ -47,9 +52,9 @@ export default function Login() {
             name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}/>
-          </div>
+          </fieldset>
 
-          <div className="input-wrapper">
+          <fieldset className="input-wrapper">
             <label htmlFor="password">Password</label>
             <input
             type="password"
@@ -57,14 +62,16 @@ export default function Login() {
             name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}/>
-          </div>
+          </fieldset>
 
-          <div className="input-remember">
-            <input type="checkbox" id='remember-me' />
+          <fieldset className="input-remember">
+            <input type="checkbox"
+            id='remember-me'
+            onChange={(e) => setRememberMe(e.target.checked)}/>
             <label htmlFor="remember-me">Remember me</label>
-          </div>
+          </fieldset>
 
-          <button type="submit"className="sign-in-button" disabled={loading}>Sign In</button>
+          <button>Sign In</button>
         </form>
       </section>
     </main>

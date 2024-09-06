@@ -1,41 +1,54 @@
-// reducer.js
+import { createSlice } from '@reduxjs/toolkit';
+import { logIn, logOut, getProfile, editUserName } from './action';
+
 const initialState = {
-  isAuthenticated: false,
-  user: null,
-  loading: false,
+  isConnected: false,
+  user: {
+    firstName: '',
+    lastName: '',
+    userName: '',
+  },
+  token: null,
   error: null,
 };
 
-const authReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'LOGIN_REQUEST':
-      console.log('Payload received in reducer:', action.payload); // Vérifie ce que le reducer reçoit
-      return {
-        ...state,
-        loading: true,
-      };
-    case 'LOGIN_SUCCESS':
-      return {
-        ...state,
-        isAuthenticated: true,
-        user: action.payload,
-        loading: false,
-      };
-    case 'LOGIN_FAILURE':
-      return {
-        ...state,
-        loading: false,
-        error: action.payload,
-      };
-    case 'LOGOUT':
-      return {
-        ...state,
-        isAuthenticated: false,
-        user: null,
-      };
-    default:
-      return state;
-  }
-};
+const authSlice = createSlice({
+  name: 'auth',
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(logIn.fulfilled, (state, action) => {
+        state.isConnected = true;
+        state.token = action.payload;
+        state.error = null;
+      })
+      .addCase(logIn.rejected, (state, action) => {
+        state.error = action.payload;
+      })
+      .addCase(logOut.fulfilled, (state) => {
+        state.isConnected = false;
+        state.token = null;
+        state.error = null;
+      })
+      .addCase(logOut.rejected, (state, action) => {
+        state.error = action.payload;
+      })
+      .addCase(getProfile.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.error = null;
+      })
+      .addCase(getProfile.rejected, (state, action) => {
+        state.error = action.payload;
+      })
+      .addCase(editUserName.fulfilled, (state, action) => {
+        state.user.userName = action.payload;
+        state.error = null;
+      })
+      .addCase(editUserName.rejected, (state, action) => {
+        state.error = action.payload;
+      })
+  },
+});
 
-export default authReducer;
+export default authSlice.reducer;

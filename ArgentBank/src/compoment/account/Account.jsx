@@ -9,8 +9,8 @@ const Account = ({ type, number, amount, balance }) => {
         <p className="account-amount">Amount: {amount}</p>
         <p className="account-amount-description">{balance}</p>
       </div>
-      <div class="account-content-wrapper cta">
-        <button class="transaction-button">View transactions</button>
+      <div className="account-content-wrapper cta">
+        <button className="transaction-button">View transactions</button>
       </div>
     </section>
   );
