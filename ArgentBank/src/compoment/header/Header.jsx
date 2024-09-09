@@ -28,7 +28,7 @@ function Header() {
         <div className='main-nav'>
           <Link className="main-nav-item" to={'/profile'}>
             <FontAwesomeIcon icon={faUserCircle} className='fa-user-circle'/>
-            <b>{user.firstName}</b>
+            <b>{user.userName}</b>
           </Link>
 
           <Link to="/Login" className="main-nav-item" onClick={handleLogout}>

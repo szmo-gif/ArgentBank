@@ -21,11 +21,13 @@ export default function Home() {
   return (
     <main>
       <Banner />
-      <div className="features">
+      <ul className="features">
         {features.map((feature, index) => (
-          <Features key={index} {...feature} />
+          <li key={index}>
+            <Features {...feature} />
+          </li>
         ))}
-      </div>
+      </ul>
     </main>
   )
 }

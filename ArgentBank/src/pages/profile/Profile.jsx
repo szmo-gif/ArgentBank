@@ -82,17 +82,18 @@ export default function Profile() {
   </form>
     
   )}
-      <section>
+      <ul>
         {accountData.map((account) => (
+          <li key={account.index}>
           <Account
-            key={account.index}
             type={account.type}
             number={account.number}
             amount={account.amount}
             balance={account.balance}
           />
+          </li>
         ))}
-      </section>
+      </ul>
     </main>
   );
 }
