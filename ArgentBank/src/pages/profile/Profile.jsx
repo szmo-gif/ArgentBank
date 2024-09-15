@@ -8,10 +8,11 @@ import './Profile.css';
 import { editUserName, getProfile } from '../../redux/action';
 
 export default function Profile() {
-  const dispatch = useDispatch(); // 
+  const dispatch = useDispatch(); 
+  const token = useSelector((state) => state.auth.user.token);
 
-  const user = useSelector((state) => state.auth.user); // Selectionne "user" dans le reducer
-  const [editing, setEditing] = useState(false); // État pour gérer l'affichage du formulaire
+  const user = useSelector((state) => state.auth.user); 
+  const [editing, setEditing] = useState(false); 
 
   useEffect(() => {
     dispatch(getProfile());
@@ -19,18 +20,18 @@ export default function Profile() {
 
   const edit = (e) => {
     e.preventDefault();
-    setEditing(true); // Mettre à jour l'état pour afficher le formulaire
+    setEditing(true); 
   };
 
   const cancel = (e) => {
     e.preventDefault();
-    setEditing(false); // Mettre à jour l'état pour revenir au header
+    setEditing(false);
   };
 
   const save = async (e) => {
     e.preventDefault();
-    const newUserName = e.target.elements.userName.value;
-    dispatch(editUserName(newUserName));
+    const newUsername = e.target.elements.userName.value;
+    dispatch(editUserName(newUsername));
     setEditing(false);
   };
 

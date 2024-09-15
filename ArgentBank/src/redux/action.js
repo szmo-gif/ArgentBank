@@ -24,13 +24,7 @@ export const logIn = createAsyncThunk(
       const data = await response.json();
       const token = data.body.token;
 
-      localStorage.setItem('token', token);
-
-      if (rememberMe) {
-        sessionStorage.setItem('token', token);
-      }
-
-      return data;
+      return token
 
     } catch (error) {
       console.error('Error:', error);
@@ -55,13 +49,13 @@ export const logOut = createAsyncThunk(
 
 export const getProfile = createAsyncThunk(
   'auth/getProfile',
-  async (_, { rejectWithValue }) => {
+  async (token, { rejectWithValue }) => {
     try {
       const response = await fetch(PROFILE_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -83,26 +77,31 @@ export const getProfile = createAsyncThunk(
 );
 
 export const editUserName = createAsyncThunk(
-  'auth/editUserName',
-  async (userName, { rejectWithValue }) => {
+  'auth/updateUsername',
+  async (userName, { rejectWithValue, getState }) => {
     try {
+      const state = getState();
+      const token = state.auth.token;
+
       const response = await fetch(PROFILE_URL, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ userName }),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to edit user name');
+        throw new Error('Failed to update user name');
       }
 
       const data = await response.json();
 
       return data.body.userName;
+
     } catch (error) {
+      console.error('EDIT Error:', error);
       return rejectWithValue(error.message);
     }
   }
