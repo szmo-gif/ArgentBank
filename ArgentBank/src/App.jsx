@@ -11,7 +11,7 @@ import Footer from './compoment/footer/Footer'
 
 function App() {
 
-  const isConnected = useSelector((state) => state.isConnected);
+  const isConnected = useSelector((state) => state.auth.isConnected);
 
 
   return (
