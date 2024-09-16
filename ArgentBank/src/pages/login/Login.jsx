@@ -4,7 +4,7 @@ import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import './Login.css';
 import { logIn } from '../../redux/action';

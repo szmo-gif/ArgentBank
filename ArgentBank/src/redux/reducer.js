@@ -4,15 +4,15 @@ import { logIn, logOut, getProfile, editUserName } from './action';
 const initialState = {
   isConnected: false,
   user: {
-    firstName: '',
-    lastName: '',
-    userName: '',
+    firstName: "",
+    lastName: "",
+    userName: "",
   },
   token: null,
   error: null,
 };
 
-const authSlice = createSlice({
+const slice = createSlice({
   name: 'auth',
   initialState,
   reducers: {},
@@ -29,6 +29,9 @@ const authSlice = createSlice({
       .addCase(logOut.fulfilled, (state) => {
         state.isConnected = false;
         state.token = null;
+        state.user.firstName = "";
+        state.user.lastName = "";
+        state.user.userName = "";
         state.error = null;
       })
       .addCase(logOut.rejected, (state, action) => {
@@ -47,8 +50,8 @@ const authSlice = createSlice({
       })
       .addCase(editUserName.rejected, (state, action) => {
         state.error = action.payload;
-      })
+      });
   },
 });
 
-export default authSlice.reducer;
+export default slice.reducer;

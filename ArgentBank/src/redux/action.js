@@ -4,9 +4,10 @@ const LOG_IN_URL = BASE_URL + 'login';
 const PROFILE_URL = BASE_URL + 'profile';
 
 export const logIn = createAsyncThunk(
-  'auth/logIn',
+  'auth/login',
   async ({ email, password, rememberMe }, { rejectWithValue }) => {
     try {
+      console.log(email, password, rememberMe);
       const response = await fetch(LOG_IN_URL, {
         method: 'POST',
         headers: {
@@ -24,23 +25,23 @@ export const logIn = createAsyncThunk(
       const data = await response.json();
       const token = data.body.token;
 
-      return token
+      return token;
 
     } catch (error) {
       console.error('Error:', error);
+
       return rejectWithValue(error.message);
     }
   }
 );
 
 export const logOut = createAsyncThunk(
-  'auth/logOut',
+  'auth/logout',
   async (_, { rejectWithValue }) => {
     try {
-      localStorage.removeItem('token');
-      sessionStorage.removeItem('token');
 
       return null;
+
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -49,8 +50,11 @@ export const logOut = createAsyncThunk(
 
 export const getProfile = createAsyncThunk(
   'auth/getProfile',
-  async (token, { rejectWithValue }) => {
+  async (_, { rejectWithValue, getState }) => {
     try {
+      const state = getState();
+      const token = state.auth.token;
+
       const response = await fetch(PROFILE_URL, {
         method: 'POST',
         headers: {
@@ -70,6 +74,7 @@ export const getProfile = createAsyncThunk(
       }
 
       return data.body;
+
     } catch (error) {
       return rejectWithValue(error.message);
     }
