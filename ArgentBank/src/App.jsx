@@ -1,5 +1,5 @@
 import './App.css'
-import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import Header from './compoment/header/Header'
@@ -11,7 +11,7 @@ import Footer from './compoment/footer/Footer'
 
 function App() {
 
-  const isAuthenticated = useSelector((state) => state.isAuthenticated);
+  const isConnected = useSelector((state) => state.isConnected);
 
 
   return (
@@ -21,7 +21,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile" element={isConnected ? <Profile /> : <Navigate to="/login" />} />
       </Routes>
 
       <Footer />
