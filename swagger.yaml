@@ -279,6 +279,13 @@ definitions:
         type: number
       balance:
         type: number
+      type:
+        type: string
+      category:
+        type: string
+      note: 
+        type: string
+        
 
   SpecificTransaction:
     type: object
